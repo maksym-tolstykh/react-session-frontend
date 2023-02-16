@@ -12,7 +12,7 @@ export default function CreateNewUserComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const res = await axios.post("http://18.158.79.88:5000/users", {
+        const res = await axios.post("https://butcher.sded.cf/users", {
             name: data.get('firstName'),
             lastName: data.get('lastName') || "",
             email: data.get('email'),
