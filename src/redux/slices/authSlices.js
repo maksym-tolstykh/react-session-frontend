@@ -9,12 +9,17 @@ const initalState = {
     message: ""
 }
 
+const api = "https://butcher.sded.cf";
+//const api = "http://localhost:5000";
+
 export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAPI) => {
     try {
-        const response = await axios.post("https://butcher.sded.cf/login", {
+
+        const response = await axios.post(api + "/login", {
             email: user.email,
             password: user.password
         })
+        console.log(response);
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -26,7 +31,7 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAP
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
     try {
-        const response = await axios.get('https://butcher.sded.cf/me');
+        const response = await axios.get(api + '/me');
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -37,7 +42,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const LogOut = createAsyncThunk("user/LogOut", async () => {
-    await axios.delete('https://butcher.sded.cf/logout');
+    await axios.delete(api + '/logout');
 });
 
 export const authSlice = createSlice({
