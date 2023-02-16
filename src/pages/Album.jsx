@@ -10,7 +10,7 @@ export default function Album() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isError } = useSelector((state => state.auth));
-
+  console.log(user);
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
