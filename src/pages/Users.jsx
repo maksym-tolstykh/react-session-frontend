@@ -11,17 +11,26 @@ export default function Users() {
     const { user, isError } = useSelector((state => state.auth));
     console.log(user?.role);
     useEffect(() => {
-        dispatch(getMe());
-    }, [dispatch]);
+        if (!user) {
+            dispatch(getMe());
+        }
+        else if (isError) {
+            navigate("/");
+        }
+        else if (user?.role !== "admin") {
+            navigate("/");
+        }
 
-    useEffect(() => {
-        if (isError) {
-            navigate("/");
-        }
-        if (user?.role !== "admin") {
-            navigate("/");
-        }
-    }, [isError, navigate, user])
+    }, [dispatch, isError, navigate]);
+
+    // useEffect(() => {
+    //     if (isError) {
+    //         navigate("/");
+    //     }
+    //     if (user?.role !== "admin") {
+    //         navigate("/");
+    //     }
+    // }, [isError, navigate, user])
     return (
         <>
             {user?.role === "admin" && <UsersComponent />}

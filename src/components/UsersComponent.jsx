@@ -40,7 +40,7 @@ export default function UsersComponent() {
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
+            <TableContainer sx={{ height: "calc(100vh - 118px)" }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -58,9 +58,9 @@ export default function UsersComponent() {
                     <TableBody>
                         {usersData
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => {
+                            .map((row, index) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                                         {columns.map((column, index) => {
                                             const value = row[column.id];
                                             return (

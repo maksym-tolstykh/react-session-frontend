@@ -111,9 +111,6 @@ export default function CreateNewUserComponent() {
 
                             </Select>
                         </Grid>
-
-
-
                     </Grid>
                     <Button
                         type="submit"
@@ -121,12 +118,8 @@ export default function CreateNewUserComponent() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign Up
+                        Create new user
                     </Button>
-                    <Grid container justifyContent="flex-end">
-                        <Grid item>
-                        </Grid>
-                    </Grid>
                 </Box>
             </Box>
         </Container>

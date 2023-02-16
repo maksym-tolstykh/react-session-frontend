@@ -12,18 +12,19 @@ export default function CreateNewUser() {
     const { user, isError } = useSelector((state => state.auth));
     console.log(user?.role);
     useEffect(() => {
-        if (user)
+        if (!user) {
             dispatch(getMe());
-    }, [dispatch]);
+        }
+        else if (isError) {
+            navigate("/");
+        }
+        else if (user?.role !== "admin") {
+            navigate("/");
+        }
 
-    useEffect(() => {
-        if (isError) {
-            navigate("/");
-        }
-        if (user?.role !== "admin") {
-            navigate("/");
-        }
-    }, [isError, navigate, user])
+    }, [dispatch, isError, navigate]);
+
+
     return (
         <>
             {user?.role === "admin" && <CreateNewUserComponent />}
