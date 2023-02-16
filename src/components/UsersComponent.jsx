@@ -21,7 +21,7 @@ export default function UsersComponent() {
 
     useEffect(() => {
         const getData = async () => {
-            const data = await axios.get("/users");
+            const data = await axios.get("http://18.158.79.88:5000/users");
             setUsersData(data.data);
 
         }
