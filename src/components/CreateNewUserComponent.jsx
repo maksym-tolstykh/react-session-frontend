@@ -2,17 +2,18 @@ import { Avatar, Box, Button, Container, CssBaseline, Grid, InputLabel, MenuItem
 import React from 'react'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from 'axios';
+import { api } from './../redux/slices/authSlices';
 
 export default function CreateNewUserComponent() {
     const [userRole, setUserRole] = React.useState('user');
-
+console.log(api);
     const handleChange = (event) => {
         setUserRole(event.target.value);
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const res = await axios.post("https://butcher.sded.cf/users", {
+        const res = await axios.post(api+"/users", {
             name: data.get('firstName'),
             lastName: data.get('lastName') || "",
             email: data.get('email'),

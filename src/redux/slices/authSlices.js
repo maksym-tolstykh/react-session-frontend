@@ -8,9 +8,9 @@ const initalState = {
     isLoading: false,
     message: ""
 }
-
-const api = "https://butcher.sded.cf";
-//const api = "http://localhost:5000";
+axios.defaults.withCredentials = true;
+//const api = "https://butcher.sded.cf";
+export const api = "http://localhost:5000";
 
 export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAPI) => {
     try {
@@ -18,7 +18,10 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAP
         const response = await axios.post(api + "/login", {
             email: user.email,
             password: user.password
-        })
+        },
+            {
+                withCredentials: true,
+            })
         console.log(response);
         return response.data;
     } catch (error) {
@@ -31,7 +34,9 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAP
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
     try {
-        const response = await axios.get(api + '/me');
+        const response = await axios.get(api + '/me', {
+            withCredentials: true,
+        });
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -44,6 +49,16 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 export const LogOut = createAsyncThunk("user/LogOut", async () => {
     await axios.delete(api + '/logout');
 });
+
+export const editCurrentUser=async (body,id)=>{
+   const {data} =  await axios.patch(api+"/users/"+id, body);
+    return data;
+}
+
+export const deleteUserData=async (id)=>{
+    await axios.delete(api+"/users/"+id);
+
+ }
 
 export const authSlice = createSlice({
     name: "auth",
